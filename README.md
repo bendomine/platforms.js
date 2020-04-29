@@ -66,3 +66,7 @@ game.add(level1);
 game.add(level2);
 ```
 When the code is run, the character will start in `level1` and when they touch a `finish` platform, they go to `level2`.
+
+So now you know enough to make a basic platformer! Just a few things before you get started:
+* Using JS's coordinate system, y values get bigger as they go down. This means that increasing the `yVelocity` (more about this later on) will make the character go down faster, and decreasing it will make it go up.
+* This also means that decreasing the y value makes the character go up.
