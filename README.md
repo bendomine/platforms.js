@@ -105,14 +105,42 @@ Continue reading for the documentation.
 
 ### `Level`: A class for each level in the game.
 #### Parameters:
-1. `x (double or int)`: The X position where ther character should spawn in when entering the level and respawn after dying.
-2. `y (double or int)`: The Y position where ther character should spawn in when entering the level and respawn after dying.
+1. `x (double or int)`: The X position where the character should spawn in when entering the level and respawn after dying.
+2. `y (double or int)`: The Y position where the character should spawn in when entering the level and respawn after dying.
 
 **Example**: `var firstLevel = new Level(40, 600.2);`
 #### Properties:
 * `platforms ([])`: An array of all of the platforms in this level. Each object in the array is a `Platform`.
-* `respawnX (double or int)`: The X position where ther character should spawn in when entering the level and respawn after dying.
-* `respawnY (double or int)`: The Y position where ther character should spawn in when entering the level and respawn after dying.
+* `respawnX (double or int)`: The X position where the character should spawn in when entering the level and respawn after dying.
+* `respawnY (double or int)`: The Y position where the character should spawn in when entering the level and respawn after dying.
 
 #### Methods:
 * `add(Platform)`: Adds the given `Platform` to the level. Can later be referenced in `Level.platforms`.
+
+
+### `Platform`: The platform class.
+#### Parameters:
+1. `x (double or int)`: The X position of the top left corner of the platform being created.
+2. `y (double or int)`: The Y position of the top left corner of the platform being created.
+3. `x2 (double or int)`: The X position of the bottom right corner of the platform being created (relative to the top left corner).
+4. `y2 (double or int)`: The Y position of the bottom right corner of the platform being created (relative to the top left corner).
+5. `type (string)`: The type of platform. Options are: 
+
+* `"platform"`: Creates a basic black platform that the character collides with.
+* `"lava"`: Creates a red platform that kills the character if the character touches it.
+* `"finish"`: Creates a green platform that takes the character to the next level if the character touches it.
+
+6. `collisionFunction (function)`: A function that runs when the character touches it.
+
+**Example:** `var platform = new Platform(0, 1000, 1000, 25, "platform", () => {console.log("The player has landed!"});`
+#### Properties:
+* `x (double or int)`: The X position of the top left corner of the platform.
+* `y (double or int)`: The Y position of the top left corner of the platform.
+* `x2 (double or int)`: The X position of the bottom right corner of the platform (relative to the top left corner).
+* `y2 (double or int)`: The Y position of the bottom right corner of the platform (relative to the top left corner).
+* `center (object)` `{x: <double or int>, y: <double or int>}`: An object with the center X and Y of the platform.
+* `type (string)`: The type of the platform. `"platform"` is a normal platform, `"lava"` kills the character as soon as it touches it, and `"finish"` takes the character to the next level when it touches it.
+* `collisionFunction (function)`: The function that runs whenever the character touches the platform.
+
+#### Methods:
+* `colliding(x (double or int), y (double or int))`: returns true if the given X and Y positions (normally used with the character's position) intersect with the platform.
