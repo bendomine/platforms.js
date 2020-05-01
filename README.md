@@ -78,6 +78,11 @@ Continue reading for the documentation.
 ### I know it's small but it will get bigger!
 
 ### `Game`: Main class that has most of the properties in it.
+#### Parameters:
+1. `config (object)`
+`config`: `{maxVelocity:<double or int>, moveSpeed: <double or int>, jumpSpeed: <double or int>}`
+
+**Example**: `var game = new Game({maxVelocity: 10, moveSpeed: 3, jumpSpeed: 10.3});`
 #### Properties:
 * `levels ([])`: An array of all levels in the game. Each object in the array is a `Level`.
 * `currentLevel (int)`: The current level being played from `Game.levels`. So if level one is being played, you can access it with `Game.levels[Game.currentLevel];`.
@@ -98,4 +103,16 @@ Continue reading for the documentation.
 * `render(HTML Canvas Object)`: Renders the platformer onto the given canvas element from the DOM.
 
 
+### `Level`: A class for each level in the game.
+#### Parameters:
+1. `x (double or int)`: The X position where ther character should spawn in when entering the level and respawn after dying.
+2. `y (double or int)`: The Y position where ther character should spawn in when entering the level and respawn after dying.
 
+**Example**: `var firstLevel = new Level(40, 600.2);`
+#### Properties:
+* `platforms ([])`: An array of all of the platforms in this level. Each object in the array is a `Platform`.
+* `respawnX (double or int)`: The X position where ther character should spawn in when entering the level and respawn after dying.
+* `respawnY (double or int)`: The Y position where ther character should spawn in when entering the level and respawn after dying.
+
+#### Methods:
+* `add(Platform)`: Adds the given `Platform` to the level. Can later be referenced in `Level.platforms`.
