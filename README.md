@@ -7,8 +7,8 @@ Platforms.js is a quick and easy way to make great JS platformers. Here's how to
 ________________________________________________________________________________________________________
 Using platforms.js is simple and easy. First, look at this starter code:
 ``` javascript
-// get our canvas context for drawing.
-var canvas = document.getElementById('canvas').getContext('2d');
+// get our canvas for rendering.
+var canvas = document.getElementById('canvas');
 // initialize game
 var game = new Game({maxVelocity:10, moveSpeed:3, jumpSpeed:10});
 // create a new level
@@ -74,5 +74,28 @@ So now you know enough to make a basic platformer! Just a few things before you 
 Continue reading for the documentation.
 
 
-## Table of Contents
-1. [`Game`](./#platforms.js)
+## Documentation
+### I know it's small but it will get bigger!
+
+### `Game`: Main class that has most of the properties in it.
+#### Properties:
+* `levels ([])`: An array of all levels in the game. Each object in the array is a `Level`.
+* `currentLevel (int)`: The current level being played from `Game.levels`. So if level one is being played, you can access it with `Game.levels[Game.currentLevel];`.
+* `x (double)`: The X position of the character.
+* `y (double)`: The Y position of the character.
+* `yVelocity (double)`: The current Y velocity of the character. A negative Y velocity indicates that the character is going up.
+* `jumping (bool)`: Is `true` if the player is jumping.
+* `speed (int or double)`: The X speed of the character. The higher it is, the faster the character will move when the side keys are pressed. Is set from the config parameter used when initializing `Game`, so can be set to an int or double.
+* `jumpSpeed (int or double)`: How high and fast the character will jump when the up key is pressed. Is set from the config parameter used when initializing `Game`, so can be set to an int or double.
+* `maxVelocity (int or double)`: Maximum possible speed the character can fall. Is set from the config parameter used when initializing `Game`, so can be set to an int or double.
+
+#### Methods:
+* `add(Level)`: Adds the given `Level` to the `Game`. Can later be referenced in `Game.levels`.
+* `jump()`: Attempts to jump. If this is impossible (for example the character is in midair), it will not jump.
+* `reset()`: Resets the physics engine. Use this at the very end of every game loop.
+* `kill()`: Kills the character and respawns them at the current level's respawn X and Y.
+* `doCollisions(x (double), y (double))`: Does collisions and runs the physics engine at the given X and Y positions. Generally, the function would be run like this: `Game.doCollisions(Game.x, Game.y);`. **Run this every loop or your physics will not work properly.**
+* `render(HTML Canvas Object)`: Renders the platformer onto the given canvas element from the DOM.
+
+
+
