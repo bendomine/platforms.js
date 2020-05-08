@@ -1,5 +1,5 @@
 # Platforms.js
-Platforms.js is a quick and easy way to make great JS platformers. Here's [an example](https://ben-w-d.github.io/platforms.js/index.html)
+Platforms.js is a quick and easy way to make great JS platformers. Here's [an example](https://ben-w-d.github.io/platforms.js/example.html)
 and here's how to get started:
 
 
