@@ -136,7 +136,7 @@ Continue reading for the documentation.
 * `"finish"`: Creates a green platform that takes the character to the next level if the character touches it.
 
 6. `collisionFunction (function)`: A function that runs when the character touches it. Is optional.
-7. `color (string)`: The color the platform should be. Can be any color accepted by Javascript.
+7. `color (string)`: The color the platform should be. Can be any color accepted by Javascript. **Will** override the default color for the platform's type.
 
 **Example:** `var platform = new Platform(0, 1000, 1000, 25, "platform", () => {console.log("The player has landed!"}, "green");`
 #### Properties:
