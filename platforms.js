@@ -1,6 +1,6 @@
 // class for all objects in game
 class Platform{
-	constructor(x, y, x2, y2 = 25,type="platform", collisionFunction=undefined){
+	constructor(x, y, x2, y2,type="platform", collisionFunction=undefined, color=undefined){
 		this.x = x;
 		this.y = y;
 		this.x2 = x2;
@@ -8,6 +8,7 @@ class Platform{
 		this.center = {x: this.x + (this.x2/2), y: this.y + (this.y2/2)}
 		this.type = type;
 		this.collisionFunction = collisionFunction;
+		this.color = color;
 	}
 	// simple method that returns true if this object is touched by the give x, y position
 	colliding(x, y){
@@ -21,14 +22,14 @@ class Platform{
 }
 
 class CustomPlatform{
-	constructor(solid, collisionFunction, runFunction = undefined){
-		this.solid = solid;
+	constructor(collisionFunction, color, runFunction = undefined){
 		this.collisionFunction = collisionFunction;
 		this.runFunction = runFunction;
 		this.name = "custom";
+		this.color = color
 	}
 	createNew(x, y, x2, y2){
-		return new Platform(x, y, x2, y2, this.name, this.collisionFunction);
+		return new Platform(x, y, x2, y2, this.name, this.collisionFunction, this.color);
 	}
 }
 
@@ -159,16 +160,36 @@ class Game{
 		canvasDrawing.clearRect(0,0,1000,1000);
 		var platforms = this.levels[this.currentLevel].platforms
 		for (var i = 0; i<platforms.length; i++){
-			if (platforms[i].type == "lava"){
-				canvasDrawing.fillStyle = "red";
-			}
-			else if (platforms[i].type == "finish"){
-				canvasDrawing.fillStyle = "green"
+			if (!platforms[i].color){
+				if (platforms[i].type != "lava" && platforms[i].type != "finish" && platforms[i].type != "custom"){
+					canvasDrawing.fillStyle = "black";
+					canvasDrawing.fillRect(platforms[i].x, platforms[i].y, platforms[i].x2, platforms[i].y2);
+				}
 			}
 			else{
-				canvasDrawing.fillStyle = "black"
+				canvasDrawing.fillStyle = platforms[i].color;
+				canvasDrawing.fillRect(platforms[i].x, platforms[i].y, platforms[i].x2, platforms[i].y2);
 			}
-			canvasDrawing.fillRect(platforms[i].x, platforms[i].y, platforms[i].x2, platforms[i].y2);
+		}
+		for (var i = 0; i<platforms.length; i++){
+			if (!platforms[i].color){
+				if (platforms[i].type == "custom"){
+					canvasDrawing.fillStyle = platforms[i].color;
+					canvasDrawing.fillRect(platforms[i].x, platforms[i].y, platforms[i].x2, platforms[i].y2);
+				}
+				else if (platforms[i].type == "lava"){
+					canvasDrawing.fillStyle = "red"
+					canvasDrawing.fillRect(platforms[i].x, platforms[i].y, platforms[i].x2, platforms[i].y2);
+				}
+				else if (platforms[i].type == "finish"){
+					canvasDrawing.fillStyle = "green"
+					canvasDrawing.fillRect(platforms[i].x, platforms[i].y, platforms[i].x2, platforms[i].y2);
+				}
+			}
+			else{
+				canvasDrawing.fillStyle = platforms[i].color;
+				canvasDrawing.fillRect(platforms[i].x, platforms[i].y, platforms[i].x2, platforms[i].y2);
+			}
 		}
 		canvasDrawing.beginPath()
 		canvasDrawing.arc(game.x,game.y,10,0*Math.PI,2*Math.PI);
