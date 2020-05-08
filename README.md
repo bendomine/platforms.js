@@ -79,7 +79,6 @@ Continue reading for the documentation.
 
 
 ## Documentation
-### I know it's small but it will get bigger!
 
 ### `Game`: Main class that has most of the properties in it.
 #### Parameters:
@@ -121,6 +120,8 @@ Continue reading for the documentation.
 #### Methods:
 * `add(Platform)`: Adds the given `Platform` to the level. Can later be referenced in `Level.platforms`.
 
+**IMPORTANT NOTE:** Platforms will be rendered in the order you add them to the level, so if you have two platforms overlapping, the last one to be added will be the one on top.
+
 
 ### `Platform`: The platform class.
 #### Parameters:
@@ -134,9 +135,10 @@ Continue reading for the documentation.
 * `"lava"`: Creates a red platform that kills the character if the character touches it.
 * `"finish"`: Creates a green platform that takes the character to the next level if the character touches it.
 
-6. `collisionFunction (function)`: A function that runs when the character touches it.
+6. `collisionFunction (function)`: A function that runs when the character touches it. Is optional.
+7. `color (string)`: The color the platform should be. Can be any color accepted by Javascript.
 
-**Example:** `var platform = new Platform(0, 1000, 1000, 25, "platform", () => {console.log("The player has landed!"});`
+**Example:** `var platform = new Platform(0, 1000, 1000, 25, "platform", () => {console.log("The player has landed!"}, "green");`
 #### Properties:
 * `x (double or int)`: The X position of the top left corner of the platform.
 * `y (double or int)`: The Y position of the top left corner of the platform.
@@ -145,6 +147,25 @@ Continue reading for the documentation.
 * `center (object)` `{x: <double or int>, y: <double or int>}`: An object with the center X and Y of the platform.
 * `type (string)`: The type of the platform. `"platform"` is a normal platform, `"lava"` kills the character as soon as it touches it, and `"finish"` takes the character to the next level when it touches it.
 * `collisionFunction (function)`: The function that runs whenever the character touches the platform.
+* `color (string)`: The color of the platform.
 
 #### Methods:
 * `colliding(x (double or int), y (double or int))`: returns true if the given X and Y positions (normally used with the character's position) intersect with the platform.
+
+
+### `CustomPlatform`: A class for making your own platforms to be used later in the function.
+#### Use this function if you have multiple platforms that you want all to do the same thing. Instead of defining each one seperately, use this class to define it once and then make copies of it.
+
+#### Properties:
+1. `collisionFunction (function)`: The function to run when the character collides with the platform.
+2. `color (string)`: The color of the platform. Can be any color Javascript accepts.
+
+#### Methods:
+* `createNew(x, y, x2, y2) (all doubles or ints)`: Returns a `Platform` with top left corner at `x` and `y`, extending `x` in the x direction and `y` in the y direction. It's just like creating a new platform. Add this platform to your level normally. However, this new platform has all of the parameters set for this custom platform.
+
+**Example:** 
+```javascript
+var helloPlatformBlueprint = new CustomPlatform( ()=> {console.log("hello!")}, "blue");
+var helloPlatform = helloPlatformBlueprint.createNew(0, 100, 1000, 25);
+```
+Creates a new platform at 0, 100 that extends 1000 in the x direction and 25 in the y direction that's colored blue and logs, "hello!" in the console whenever the player collides with it.
