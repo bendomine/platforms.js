@@ -1,10 +1,14 @@
 # Platforms.js
-Platforms.js is a quick and easy way to make great JS platformers. Here's how to get started:
+Platforms.js is a quick and easy way to make great JS platformers. Here's [an example]("https://ben-w-d.github.io/platforms.js/index.html")
+and here's how to get started:
+
+
 1. **Get the file.** Download platforms.js and put it in your project folder.
 2. **Link it up.** Link the platforms.js in your HTML file. 
 `<script type="text/javascript" src="platformer.js"></script>`
 3. **Start coding.** Continue reading to find out how!
-________________________________________________________________________________________________________
+
+
 Using platforms.js is simple and easy. First, look at this starter code:
 ``` javascript
 // get our canvas for rendering.
