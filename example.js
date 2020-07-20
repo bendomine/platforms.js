@@ -8,7 +8,7 @@ level1.add(new Platform(0, 475, 500, 25, "platform", ()=>{}, "purple"))
 level1.add(new Platform(200, 300, 25, 200))
 level1.add(new Platform(300, 300, 200, 25))
 level1.add(bouncy.createNew(600, 300, 200, 25))
-level1.add(new Platform(600, 300, 25, 200, "finish"))
+level1.add(new Platform(600, 300, 25, 200))
 level1.add(new Platform(600, 300, 200, 25))
 game.add(level1)
 var level2 = new Level(0, 0);
